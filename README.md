@@ -72,18 +72,6 @@ Every design choice reflects the identity of the civilization it represents.
 
 ---
 
-## 🧭 Navigation Experience
-
-The homepage introduces a trinity structure:
-
-* Persia
-* Egypt
-* Greece
-
-Each section acts as a portal into a distinct mythological universe, with its own tone, color palette, and narrative voice.
-
----
-
 ## 🌠 Vision
 
 This project aims to evolve into:
