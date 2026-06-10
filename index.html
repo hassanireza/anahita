@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anahita &#8211; Gods of the Ancient World</title>
+  <meta name="description" content="Explore the divine hierarchies of Persia, Egypt, and Greece. A scholarly journey through ancient mythology.">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="home">
+  <div class="custom-cursor"></div>
+  <div class="cursor-ring"></div>
+  <canvas class="bg-canvas"></canvas>
+
+  <nav class="site-nav">
+    <a href="index.html" class="nav-logo">ANAHITA</a>
+    <ul class="nav-links">
+      <li><a href="persia.html">Persia</a></li>
+      <li><a href="egypt.html">Egypt</a></li>
+      <li><a href="greek.html">Greece</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile-menu">
+    <button class="nav-mobile-close">CLOSE</button>
+    <a href="persia.html">Persia</a>
+    <a href="egypt.html">Egypt</a>
+    <a href="greek.html">Greece</a>
+  </div>
+
+  <main class="page-wrapper">
+    <section class="home-hero">
+      <p class="eyebrow reveal">The Sacred Archive of Divine Beings</p>
+      <h1 class="reveal gold-shimmer">ANAHITA</h1>
+      <p class="subtitle reveal">Where fire, sand, and marble converge. Three civilizations, one cosmos, infinite gods.</p>
+
+      <div class="trinity-nav reveal">
+
+        <a href="persia.html" class="trinity-card persia-card" tabindex="0">
+          <div class="card-bg"></div>
+          <div class="overlay"></div>
+          <div class="card-content">
+            <div class="civ-symbol">
+              <!--
+                Homa (Huma) bird — Persepolis bas-relief style.
+                The sacred bird of Persian kingship carved at Apadana & Gate of All Nations.
+                Profile pose facing right, layered flat-carved feathers, hooked raptor beak,
+                prominent crest, scaled body, curled tail fan. Animated: slow wing breath +
+                golden glow shimmer as if lit by torchlight on stone.
+              -->
+              <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Homa bird of Persepolis">
+                <defs>
+                  <!-- Stone relief base tone -->
+                  <linearGradient id="homa-stone" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#c8973a"/>
+                    <stop offset="60%" stop-color="#a07428"/>
+                    <stop offset="100%" stop-color="#7a5518"/>
+                  </linearGradient>
+                  <!-- Wing fill: layered gold -->
+                  <linearGradient id="homa-wing-l" x1="80" y1="45" x2="8" y2="70" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#e8b84b"/>
+                    <stop offset="55%" stop-color="#b8832a"/>
+                    <stop offset="100%" stop-color="#7a5518" stop-opacity="0.6"/>
+                  </linearGradient>
+                  <linearGradient id="homa-wing-r" x1="80" y1="45" x2="152" y2="70" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#e8b84b"/>
+                    <stop offset="55%" stop-color="#b8832a"/>
+                    <stop offset="100%" stop-color="#7a5518" stop-opacity="0.6"/>
+                  </linearGradient>
+                  <!-- Torch-light shimmer radial -->
+                  <radialGradient id="homa-glow" cx="50%" cy="55%" r="45%">
+                    <stop offset="0%" stop-color="#f5deb3" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#e8562a" stop-opacity="0"/>
+                  </radialGradient>
+                  <!-- Engraved line filter — slight emboss -->
+                  <filter id="homa-relief" x="-5%" y="-5%" width="110%" height="110%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="0.6" result="blur"/>
+                    <feOffset dx="0.5" dy="0.8" result="offset"/>
+                    <feComposite in="SourceGraphic" in2="offset" operator="over"/>
+                  </filter>
+                </defs>
+
+                <!-- ═══════════════════════════════════════
+                     ANIMATED GROUPS
+                     Wing-breath: gentle translateY oscillation on both wings
+                     Glow pulse: torch-flicker overlay
+                ═══════════════════════════════════════ -->
+
+                <!-- ── LEFT WING (spread wide, layered feathers, Persepolis style) ── -->
+                <g filter="url(#homa-relief)">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; 0,-2.5; 0,0" dur="4s" repeatCount="indefinite"
+                    calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                    additive="sum"/>
+
+                  <!-- Wing base / primary layer -->
+                  <path d="M78,58
+                    C70,52 58,46 42,40 C28,35 14,34 6,36
+                    C14,32 30,31 46,36 C62,41 74,50 80,58 Z"
+                    fill="url(#homa-wing-l)" opacity="0.95"/>
+
+                  <!-- Secondary feather row -->
+                  <path d="M78,62
+                    C68,57 54,52 38,47 C24,43 12,43 6,45
+                    C14,41 26,41 42,46 C58,51 70,58 78,64 Z"
+                    fill="#c9920e" opacity="0.75"/>
+
+                  <!-- Tertiary feather row -->
+                  <path d="M78,67
+                    C70,63 57,59 44,56 C32,53 20,53 14,55
+                    C22,51 34,51 48,55 C62,59 72,64 78,68 Z"
+                    fill="#e8b84b" opacity="0.5"/>
+
+                  <!-- Quaternary (coverts) -->
+                  <path d="M78,71
+                    C72,68 62,65 52,63 C42,61 32,62 26,63
+                    C34,60 44,59 56,62 C68,65 74,69 79,72 Z"
+                    fill="#f0cc6a" opacity="0.35"/>
+
+                  <!-- Individual primary feather tip lines (bas-relief engraving) -->
+                  <line x1="10"  y1="36" x2="6"   y2="42" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.9"/>
+                  <line x1="18"  y1="35" x2="13"  y2="41" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
+                  <line x1="26"  y1="34" x2="21"  y2="40" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.8"/>
+                  <line x1="34"  y1="35" x2="30"  y2="41" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
+                  <line x1="42"  y1="37" x2="38"  y2="43" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+                  <line x1="50"  y1="40" x2="47"  y2="46" stroke="#9a6c20" stroke-width="0.7" stroke-linecap="round" opacity="0.6"/>
+                  <line x1="58"  y1="43" x2="55"  y2="49" stroke="#b8832a" stroke-width="0.7" stroke-linecap="round" opacity="0.55"/>
+                  <line x1="66"  y1="47" x2="63"  y2="53" stroke="#b8832a" stroke-width="0.6" stroke-linecap="round" opacity="0.5"/>
+                  <!-- Feather quill separation lines (the horizontal scallop rows) -->
+                  <path d="M14,47 Q28,45 42,48 Q58,51 70,56" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.5"/>
+                  <path d="M22,53 Q36,51 50,54 Q64,57 74,61" stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.4"/>
+                  <path d="M32,59 Q46,57 58,60 Q70,63 76,67" stroke="#9a6c20" stroke-width="0.5" fill="none" opacity="0.35"/>
+                </g>
+
+                <!-- ── RIGHT WING ── -->
+                <g filter="url(#homa-relief)">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; 0,-2.5; 0,0" dur="4s" repeatCount="indefinite"
+                    calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                    additive="sum"/>
+
+                  <path d="M82,58
+                    C90,52 102,46 118,40 C132,35 146,34 154,36
+                    C146,32 130,31 114,36 C98,41 86,50 80,58 Z"
+                    fill="url(#homa-wing-r)" opacity="0.95"/>
+                  <path d="M82,62
+                    C92,57 106,52 122,47 C136,43 148,43 154,45
+                    C146,41 134,41 118,46 C102,51 90,58 82,64 Z"
+                    fill="#c9920e" opacity="0.75"/>
+                  <path d="M82,67
+                    C90,63 103,59 116,56 C128,53 140,53 146,55
+                    C138,51 126,51 112,55 C98,59 88,64 82,68 Z"
+                    fill="#e8b84b" opacity="0.5"/>
+                  <path d="M82,71
+                    C88,68 98,65 108,63 C118,61 128,62 134,63
+                    C126,60 116,59 104,62 C92,65 86,69 81,72 Z"
+                    fill="#f0cc6a" opacity="0.35"/>
+
+                  <line x1="150" y1="36" x2="154" y2="42" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.9"/>
+                  <line x1="142" y1="35" x2="147" y2="41" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
+                  <line x1="134" y1="34" x2="139" y2="40" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.8"/>
+                  <line x1="126" y1="35" x2="130" y2="41" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
+                  <line x1="118" y1="37" x2="122" y2="43" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+                  <line x1="110" y1="40" x2="113" y2="46" stroke="#9a6c20" stroke-width="0.7" stroke-linecap="round" opacity="0.6"/>
+                  <line x1="102" y1="43" x2="105" y2="49" stroke="#b8832a" stroke-width="0.7" stroke-linecap="round" opacity="0.55"/>
+                  <line x1="94"  y1="47" x2="97"  y2="53" stroke="#b8832a" stroke-width="0.6" stroke-linecap="round" opacity="0.5"/>
+                  <path d="M146,47 Q132,45 118,48 Q102,51 90,56" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.5"/>
+                  <path d="M138,53 Q124,51 110,54 Q96,57 86,61"  stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.4"/>
+                  <path d="M128,59 Q114,57 102,60 Q90,63 84,67"  stroke="#9a6c20" stroke-width="0.5" fill="none" opacity="0.35"/>
+                </g>
+
+                <!-- ── BODY (central torso, scaled like Persepolis carving) ── -->
+                <g filter="url(#homa-relief)">
+                  <!-- Main body mass -->
+                  <ellipse cx="80" cy="72" rx="18" ry="22" fill="url(#homa-stone)" opacity="0.95"/>
+                  <!-- Body scale rows (Persepolis birds have scaled/feathered breast detail) -->
+                  <path d="M66,63 Q80,60 94,63" stroke="#7a5518" stroke-width="0.8" fill="none" opacity="0.6"/>
+                  <path d="M64,68 Q80,65 96,68" stroke="#7a5518" stroke-width="0.8" fill="none" opacity="0.6"/>
+                  <path d="M63,73 Q80,70 97,73" stroke="#7a5518" stroke-width="0.7" fill="none" opacity="0.55"/>
+                  <path d="M64,78 Q80,75 96,78" stroke="#7a5518" stroke-width="0.7" fill="none" opacity="0.5"/>
+                  <path d="M66,83 Q80,80 94,83" stroke="#9a6c20" stroke-width="0.6" fill="none" opacity="0.45"/>
+                  <!-- Chest highlight -->
+                  <ellipse cx="80" cy="68" rx="9" ry="7" fill="#e8c060" opacity="0.15"/>
+                </g>
+
+                <!-- ── TAIL FAN (spread, with curled volute tips — signature Persepolis detail) ── -->
+                <g filter="url(#homa-relief)">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; 0,1.2; 0,0" dur="4s" repeatCount="indefinite"
+                    calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                    additive="sum"/>
+
+                  <!-- Fan base -->
+                  <path d="M80,90 C74,96 66,100 60,98 C65,95 72,92 80,92 Z"
+                    fill="#c9920e" opacity="0.85"/>
+                  <path d="M80,90 C76,98 72,104 68,104 C70,100 75,95 80,92 Z"
+                    fill="#b8832a" opacity="0.8"/>
+                  <path d="M80,90 C80,100 80,107 79,108 C79,103 79,97 80,92 Z"
+                    fill="#e8b84b" opacity="0.75"/>
+                  <path d="M80,90 C84,98 88,104 92,104 C90,100 85,95 80,92 Z"
+                    fill="#b8832a" opacity="0.8"/>
+                  <path d="M80,90 C86,96 94,100 100,98 C95,95 88,92 80,92 Z"
+                    fill="#c9920e" opacity="0.85"/>
+                  <!-- Volute curls at tail tips (signature detail) -->
+                  <path d="M60,98 C58,100 57,103 59,104 C61,105 63,103 62,101"
+                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.8"/>
+                  <path d="M68,104 C67,107 67,110 69,110 C71,110 72,108 71,106"
+                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.75"/>
+                  <path d="M79,108 C79,111 80,114 82,113 C84,112 84,110 82,109"
+                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.7"/>
+                  <path d="M92,104 C93,107 93,110 91,110 C89,110 88,108 89,106"
+                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.75"/>
+                  <path d="M100,98 C102,100 103,103 101,104 C99,105 97,103 98,101"
+                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.8"/>
+                  <!-- Tail quill lines -->
+                  <line x1="80" y1="90" x2="61"  y2="99" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
+                  <line x1="80" y1="90" x2="69"  y2="103" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
+                  <line x1="80" y1="90" x2="79"  y2="107" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
+                  <line x1="80" y1="90" x2="91"  y2="103" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
+                  <line x1="80" y1="90" x2="99"  y2="99"  stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
+                </g>
+
+                <!-- ── NECK & HEAD ── -->
+                <g filter="url(#homa-relief)">
+                  <!-- Neck -->
+                  <path d="M74,58 C73,52 74,46 77,42 C80,38 83,37 84,40 C85,44 83,50 82,58 Z"
+                    fill="url(#homa-stone)" opacity="0.95"/>
+                  <!-- Neck scale / feather lines -->
+                  <path d="M74,55 Q79,53 83,55" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.55"/>
+                  <path d="M74,51 Q79,49 83,51" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.5"/>
+                  <path d="M75,47 Q79,45 83,47" stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.45"/>
+
+                  <!-- Head — profile, facing right, like Persepolis birds -->
+                  <ellipse cx="86" cy="38" rx="9" ry="7" fill="url(#homa-stone)" opacity="0.95"/>
+
+                  <!-- Hooked raptor beak (profile, right-facing) -->
+                  <path d="M94,36 C98,35 101,34 101,36 C101,38 98,39 95,39 C97,38 98,37 96,37 Z"
+                    fill="#c9920e" opacity="0.9"/>
+                  <!-- Beak ridge line -->
+                  <path d="M94,36 C97,35 100,34.5 101,36" stroke="#7a5518" stroke-width="0.7" fill="none" opacity="0.7"/>
+
+                  <!-- Eye — large, almond-shaped, Achaemenid style -->
+                  <ellipse cx="90" cy="36" rx="3" ry="2.2" fill="#1a0c00" opacity="0.9"/>
+                  <ellipse cx="90" cy="36" rx="1.5" ry="1.2" fill="#e8b84b" opacity="0.6"/>
+                  <!-- Eye lid line -->
+                  <path d="M87,35 Q90,33.5 93,35" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.6"/>
+
+                  <!-- Crest — multiple upswept plumes, key Homa identifier -->
+                  <path d="M82,32 C81,26 79,21 78,16 C79,20 81,25 82,31 Z"
+                    fill="#e8b84b" opacity="0.85">
+                    <animate attributeName="d"
+                      values="M82,32 C81,26 79,21 78,16 C79,20 81,25 82,31 Z;
+                              M82,32 C82,26 80,20 79,15 C80,19 82,24 82,31 Z;
+                              M82,32 C81,26 79,21 78,16 C79,20 81,25 82,31 Z"
+                      dur="3.5s" repeatCount="indefinite"
+                      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+                  </path>
+                  <path d="M84,31 C84,25 83,19 82,14 C83,18 85,24 85,31 Z"
+                    fill="#f0cc6a" opacity="0.8">
+                    <animate attributeName="d"
+                      values="M84,31 C84,25 83,19 82,14 C83,18 85,24 85,31 Z;
+                              M84,31 C85,25 84,18 83,13 C84,17 86,23 85,31 Z;
+                              M84,31 C84,25 83,19 82,14 C83,18 85,24 85,31 Z"
+                      dur="3.5s" begin="0.4s" repeatCount="indefinite"
+                      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+                  </path>
+                  <path d="M86,31 C87,25 87,19 87,14 C87,18 87,24 87,31 Z"
+                    fill="#c9920e" opacity="0.7">
+                    <animate attributeName="d"
+                      values="M86,31 C87,25 87,19 87,14 C87,18 87,24 87,31 Z;
+                              M86,31 C87,24 88,18 88,13 C88,17 88,23 87,31 Z;
+                              M86,31 C87,25 87,19 87,14 C87,18 87,24 87,31 Z"
+                      dur="3.5s" begin="0.8s" repeatCount="indefinite"
+                      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+                  </path>
+                  <!-- Crest volute base curl -->
+                  <path d="M80,33 C78,31 77,29 79,28 C81,27 83,29 82,31"
+                    stroke="#e8b84b" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.7"/>
+                </g>
+
+                <!-- ── LEGS (short, Persepolis birds have bird-of-prey talons) ── -->
+                <g filter="url(#homa-relief)" opacity="0.8">
+                  <!-- Left leg -->
+                  <line x1="74" y1="90" x2="70" y2="100" stroke="#a07428" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="70" y1="100" x2="64" y2="105" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
+                  <line x1="70" y1="100" x2="68" y2="106" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
+                  <line x1="70" y1="100" x2="72" y2="106" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
+                  <!-- Right leg -->
+                  <line x1="86" y1="90" x2="90" y2="100" stroke="#a07428" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="90" y1="100" x2="84" y2="106" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
+                  <line x1="90" y1="100" x2="90" y2="107" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
+                  <line x1="90" y1="100" x2="96" y2="105" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
+                </g>
+
+                <!-- ── TORCH-LIGHT GLOW OVERLAY (flicker animation) ── -->
+                <ellipse cx="80" cy="68" rx="55" ry="45" fill="url(#homa-glow)">
+                  <animate attributeName="opacity" values="0.7;1;0.6;0.95;0.7" dur="5s" repeatCount="indefinite"/>
+                </ellipse>
+
+                <!-- ── STONE SURFACE TEXTURE DOTS (Persepolis carving grain) ── -->
+                <g opacity="0.12" fill="#f5deb3">
+                  <circle cx="30" cy="55" r="0.8"/><circle cx="44" cy="50" r="0.7"/>
+                  <circle cx="58" cy="47" r="0.8"/><circle cx="20" cy="62" r="0.6"/>
+                  <circle cx="36" cy="60" r="0.7"/><circle cx="50" cy="57" r="0.8"/>
+                  <circle cx="120" cy="55" r="0.8"/><circle cx="106" cy="50" r="0.7"/>
+                  <circle cx="92" cy="47" r="0.8"/><circle cx="130" cy="62" r="0.6"/>
+                  <circle cx="114" cy="60" r="0.7"/><circle cx="100" cy="57" r="0.8"/>
+                  <circle cx="72" cy="72" r="0.7"/><circle cx="80" cy="76" r="0.8"/>
+                  <circle cx="88" cy="72" r="0.7"/><circle cx="76" cy="80" r="0.6"/>
+                </g>
+              </svg>
+            </div>
+            <p class="region-label">The Sacred Flame</p>
+            <h2>PERSIA</h2>
+            <p class="desc">The eternal war of Light and Darkness. Ahura Mazda against Angra Mainyu, Good against Evil.</p>
+            <span class="enter-arrow">Enter <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
+
+        <a href="egypt.html" class="trinity-card egypt-card" tabindex="0">
+          <div class="card-bg"></div>
+          <div class="overlay"></div>
+          <div class="card-content">
+            <div class="civ-symbol">
+              <!-- Egypt: Ra's solar barque crossing the sky, pyramid below, scarab beetle rising -->
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                <!-- Pyramid silhouette, static base -->
+                <polygon points="30,36 50,54 10,54" fill="none" stroke="#d4a017" stroke-width="0.7" opacity="0.55"/>
+                <line x1="30" y1="36" x2="30" y2="54" stroke="#d4a017" stroke-width="0.3" opacity="0.2"/>
+                <line x1="10" y1="54" x2="50" y2="54" stroke="#d4a017" stroke-width="0.3" opacity="0.2"/>
+
+                <!-- Nile horizon line -->
+                <line x1="6" y1="54" x2="54" y2="54" stroke="#d4a017" stroke-width="0.5" opacity="0.35"/>
+
+                <!-- Sun disc: orbits in an arc above the pyramid -->
+                <g>
+                  <!-- Sun halo glow -->
+                  <circle r="5" fill="none" stroke="#d4a017" stroke-width="0.4" opacity="0.2">
+                    <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0.5;1" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1">
+                      <mpath href="#ra-path"/>
+                    </animateMotion>
+                  </circle>
+                  <!-- Sun disc core -->
+                  <circle r="3.5" fill="#d4a017" opacity="0.9">
+                    <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" repeatCount="indefinite"/>
+                    <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0.5;1" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1">
+                      <mpath href="#ra-path"/>
+                    </animateMotion>
+                  </circle>
+                  <!-- Sun rays: 8 short lines emanating, travelling with sun -->
+                  <g opacity="0.6">
+                    <line x1="-6" y1="0" x2="-8" y2="0" stroke="#d4a017" stroke-width="0.7" stroke-linecap="round"/>
+                    <line x1="6" y1="0" x2="8" y2="0" stroke="#d4a017" stroke-width="0.7" stroke-linecap="round"/>
+                    <line x1="0" y1="-6" x2="0" y2="-8" stroke="#d4a017" stroke-width="0.7" stroke-linecap="round"/>
+                    <line x1="0" y1="6" x2="0" y2="8" stroke="#d4a017" stroke-width="0.7" stroke-linecap="round"/>
+                    <line x1="-4.2" y1="-4.2" x2="-5.7" y2="-5.7" stroke="#d4a017" stroke-width="0.6" stroke-linecap="round"/>
+                    <line x1="4.2" y1="-4.2" x2="5.7" y2="-5.7" stroke="#d4a017" stroke-width="0.6" stroke-linecap="round"/>
+                    <line x1="4.2" y1="4.2" x2="5.7" y2="5.7" stroke="#d4a017" stroke-width="0.6" stroke-linecap="round"/>
+                    <line x1="-4.2" y1="4.2" x2="-5.7" y2="5.7" stroke="#d4a017" stroke-width="0.6" stroke-linecap="round"/>
+                    <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0.5;1" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1">
+                      <mpath href="#ra-path"/>
+                    </animateMotion>
+                  </g>
+                </g>
+
+                <!-- Ra's arc path: rises left, peaks centre-top, sets right -->
+                <defs>
+                  <path id="ra-path" d="M 8,33 Q 30,4 52,33"/>
+                </defs>
+
+                <!-- Faint arc trail -->
+                <path d="M 8,33 Q 30,4 52,33" stroke="#d4a017" stroke-width="0.4" fill="none" opacity="0.18" stroke-dasharray="2 3"/>
+
+                <!-- Eye of Ra / Wadjet — subtle, centred in pyramid -->
+                <g transform="translate(30,46)" opacity="0.5">
+                  <ellipse cx="0" cy="0" rx="5" ry="2.5" stroke="#d4a017" stroke-width="0.5" fill="none"/>
+                  <circle cx="0" cy="0" r="1.2" fill="#d4a017" opacity="0.7"/>
+                  <path d="M0,2.5 Q2,4.5 4,3" stroke="#d4a017" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+                </g>
+
+              </svg>
+            </div>
+            <p class="region-label">The Eternal Nile</p>
+            <h2>EGYPT</h2>
+            <p class="desc">The cycle of Ra's journey, Osiris's resurrection, and the cosmic order of Ma'at. Death reborn as life.</p>
+            <span class="enter-arrow">Enter <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
+
+        <a href="greek.html" class="trinity-card greek-card" tabindex="0">
+          <div class="card-bg"></div>
+          <div class="overlay"></div>
+          <div class="card-content">
+            <div class="civ-symbol">
+              <!-- Greece: Zeus's thunderbolt with electrical arc and Greek meander frame -->
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                <!-- Greek meander / key border (static) -->
+                <path d="M4,4 L56,4 L56,56 L4,56 Z" stroke="#a8c4e0" stroke-width="0.5" fill="none" opacity="0.2"/>
+                <!-- Meander top -->
+                <path d="M4,4 L12,4 L12,10 L20,10 L20,4 L28,4" stroke="#a8c4e0" stroke-width="0.6" fill="none" opacity="0.35" stroke-linecap="square"/>
+                <path d="M32,4 L40,4 L40,10 L48,10 L48,4 L56,4" stroke="#a8c4e0" stroke-width="0.6" fill="none" opacity="0.35" stroke-linecap="square"/>
+                <!-- Meander bottom -->
+                <path d="M4,56 L12,56 L12,50 L20,50 L20,56 L28,56" stroke="#a8c4e0" stroke-width="0.6" fill="none" opacity="0.35" stroke-linecap="square"/>
+                <path d="M32,56 L40,56 L40,50 L48,50 L48,56 L56,56" stroke="#a8c4e0" stroke-width="0.6" fill="none" opacity="0.35" stroke-linecap="square"/>
+
+                <!-- Thunderbolt shape: classic winged Zeus bolt -->
+                <g>
+                  <!-- Main bolt body -->
+                  <path d="M34,6 L22,30 L30,30 L26,54 L38,28 L30,28 Z"
+                    fill="#a8c4e0" opacity="0.85">
+                    <animate attributeName="opacity" values="0.85;1;0.5;1;0.85" dur="3s" repeatCount="indefinite"/>
+                  </path>
+                  <!-- Bolt bright core -->
+                  <path d="M33,10 L24,29 L31,29 L27,50 L36,30 L30.5,30 Z"
+                    fill="white" opacity="0.0">
+                    <animate attributeName="opacity" values="0;0;0.6;0;0;0;0.4;0;0" dur="3s" repeatCount="indefinite"/>
+                  </path>
+                </g>
+
+                <!-- Electric arc sparks emanating from bolt tip -->
+                <g opacity="0">
+                  <line x1="26" y1="54" x2="20" y2="58" stroke="#a8c4e0" stroke-width="0.8" stroke-linecap="round"/>
+                  <line x1="26" y1="54" x2="32" y2="58" stroke="#a8c4e0" stroke-width="0.8" stroke-linecap="round"/>
+                  <line x1="26" y1="54" x2="26" y2="59" stroke="#a8c4e0" stroke-width="0.8" stroke-linecap="round"/>
+                  <animate attributeName="opacity" values="0;0;0;1;0;0;1;0;0" dur="3s" repeatCount="indefinite"/>
+                </g>
+
+                <!-- Top wing left -->
+                <path d="M34,6 L28,10 L26,16 L30,14 Z" fill="#a8c4e0" opacity="0.4">
+                  <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/>
+                </path>
+                <!-- Top wing right -->
+                <path d="M34,6 L40,10 L42,16 L38,14 Z" fill="#a8c4e0" opacity="0.4">
+                  <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/>
+                </path>
+
+                <!-- Glow halo behind bolt -->
+                <ellipse cx="30" cy="30" rx="10" ry="22" fill="none" stroke="#a8c4e0" stroke-width="3" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0.12;0;0;0;0.08;0;0" dur="3s" repeatCount="indefinite"/>
+                </ellipse>
+
+              </svg>
+            </div>
+            <p class="region-label">Mount Olympus</p>
+            <h2>GREECE</h2>
+            <p class="desc">A divine royal family born from Chaos. From Titans to Olympians, a lineage of myth and power.</p>
+            <span class="enter-arrow">Enter <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="ornament-row reveal">
+        <div class="ornament-line"></div>
+        <span>Three Civilizations</span>
+        <div class="ornament-line right"></div>
+        <span>One Archive</span>
+        <div class="ornament-line"></div>
+      </div>
+    </section>
+
+    <section class="home-closing-blurb">
+      <p class="reveal home-closing-text">
+        Before time was measured, before empires rose and fell, humanity looked skyward and gave names to the forces that shaped existence. This is their story, told through the divine beings they created, feared, and worshipped.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>ANAHITA &nbsp;&#183;&nbsp; GODS OF THE ANCIENT WORLD</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
