@@ -46,271 +46,204 @@
           <div class="card-content">
             <div class="civ-symbol">
               <!--
-                Homa (Huma) bird — Persepolis bas-relief style.
-                The sacred bird of Persian kingship carved at Apadana & Gate of All Nations.
-                Profile pose facing right, layered flat-carved feathers, hooked raptor beak,
-                prominent crest, scaled body, curled tail fan. Animated: slow wing breath +
-                golden glow shimmer as if lit by torchlight on stone.
+                Persian Shirdal (Shir-dal, "lion-eagle") — the Achaemenid Griffin.
+                Canonical anatomy: four-legged LION BODY with long haunches,
+                tufted lion tail, EAGLE HEAD in proud profile, large feathered
+                WINGS sprouting from the lion's shoulders, eagle talons on
+                front feet, lion paws on rear. Drawn in Persepolis bas-relief
+                flat-profile style. All animation via CSS classes.
               -->
-              <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Homa bird of Persepolis">
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Achaemenid Persian Griffin — Shirdal">
                 <defs>
-                  <!-- Stone relief base tone -->
-                  <linearGradient id="homa-stone" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#c8973a"/>
-                    <stop offset="60%" stop-color="#a07428"/>
+                  <linearGradient id="gs-body" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%"  stop-color="#d4a040"/>
+                    <stop offset="50%" stop-color="#a87828"/>
                     <stop offset="100%" stop-color="#7a5518"/>
                   </linearGradient>
-                  <!-- Wing fill: layered gold -->
-                  <linearGradient id="homa-wing-l" x1="80" y1="45" x2="8" y2="70" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#e8b84b"/>
-                    <stop offset="55%" stop-color="#b8832a"/>
-                    <stop offset="100%" stop-color="#7a5518" stop-opacity="0.6"/>
+                  <linearGradient id="gs-wing" x1="100" y1="20" x2="100" y2="80" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%"  stop-color="#f0cc6a"/>
+                    <stop offset="60%" stop-color="#c9920e"/>
+                    <stop offset="100%" stop-color="#7a5518" stop-opacity="0.5"/>
                   </linearGradient>
-                  <linearGradient id="homa-wing-r" x1="80" y1="45" x2="152" y2="70" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#e8b84b"/>
-                    <stop offset="55%" stop-color="#b8832a"/>
-                    <stop offset="100%" stop-color="#7a5518" stop-opacity="0.6"/>
-                  </linearGradient>
-                  <!-- Torch-light shimmer radial -->
-                  <radialGradient id="homa-glow" cx="50%" cy="55%" r="45%">
-                    <stop offset="0%" stop-color="#f5deb3" stop-opacity="0.18"/>
-                    <stop offset="100%" stop-color="#e8562a" stop-opacity="0"/>
+                  <radialGradient id="gs-glow" cx="45%" cy="55%" r="50%">
+                    <stop offset="0%"   stop-color="#f5deb3" stop-opacity="0.2"/>
+                    <stop offset="100%" stop-color="#c96820" stop-opacity="0"/>
                   </radialGradient>
-                  <!-- Engraved line filter — slight emboss -->
-                  <filter id="homa-relief" x="-5%" y="-5%" width="110%" height="110%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="0.6" result="blur"/>
-                    <feOffset dx="0.5" dy="0.8" result="offset"/>
-                    <feComposite in="SourceGraphic" in2="offset" operator="over"/>
+                  <filter id="gs-relief">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="0.5" result="b"/>
+                    <feOffset dx="0.4" dy="0.7" result="o"/>
+                    <feComposite in="SourceGraphic" in2="o" operator="over"/>
                   </filter>
                 </defs>
 
-                <!-- ═══════════════════════════════════════
-                     ANIMATED GROUPS
-                     Wing-breath: gentle translateY oscillation on both wings
-                     Glow pulse: torch-flicker overlay
-                ═══════════════════════════════════════ -->
+                <!-- ══ LION BODY ══ -->
+                <!-- Main torso + haunches — long horizontal lion form -->
+                <g filter="url(#gs-relief)">
+                  <!-- Upper back / spine line -->
+                  <path d="M52,62 C80,58 120,56 155,60 C160,62 162,65 160,68"
+                    stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.3"/>
+                  <!-- Body mass -->
+                  <path d="M55,65 C80,60 125,58 155,62 C162,67 162,80 155,85
+                            C130,90 90,90 60,88 C48,85 45,78 48,70 Z"
+                    fill="url(#gs-body)" opacity="0.95"/>
+                  <!-- Belly line -->
+                  <path d="M60,88 C90,93 130,93 155,88" stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.4"/>
+                  <!-- Rib/flank muscle lines (bas-relief carving detail) -->
+                  <path d="M90,60 Q92,74 90,88"  stroke="#7a5518" stroke-width="0.7" fill="none" opacity="0.4"/>
+                  <path d="M105,59 Q107,73 105,88" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.35"/>
+                  <path d="M120,58 Q122,73 120,88" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.3"/>
+                  <!-- Haunch muscle (lion's powerful rear quarter) -->
+                  <path d="M138,60 C148,60 158,64 160,72 C161,78 158,84 155,85"
+                    stroke="#9a6c20" stroke-width="1" fill="none" opacity="0.5"/>
+                </g>
 
-                <!-- ── LEFT WING (spread wide, layered feathers, Persepolis style) ── -->
-                <g filter="url(#homa-relief)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="0,0; 0,-2.5; 0,0" dur="4s" repeatCount="indefinite"
-                    calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
-                    additive="sum"/>
+                <!-- ══ EAGLE TALONS — front feet ══ -->
+                <g filter="url(#gs-relief)" opacity="0.9">
+                  <!-- Front left leg -->
+                  <path d="M65,88 L62,100 L60,108" stroke="#a07428" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                  <!-- Three talons left -->
+                  <path d="M60,108 C55,111 50,112 48,110" stroke="#8a6020" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                  <path d="M60,108 C57,113 56,117 56,117"  stroke="#8a6020" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                  <path d="M60,108 C63,112 65,116 64,117"  stroke="#8a6020" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                  <!-- Front right leg -->
+                  <path d="M85,88 L84,100 L83,108" stroke="#a07428" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                  <!-- Three talons right -->
+                  <path d="M83,108 C78,111 73,112 71,110" stroke="#8a6020" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                  <path d="M83,108 C80,113 79,117 79,117"  stroke="#8a6020" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                  <path d="M83,108 C86,112 88,116 87,117"  stroke="#8a6020" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                </g>
 
-                  <!-- Wing base / primary layer -->
-                  <path d="M78,58
-                    C70,52 58,46 42,40 C28,35 14,34 6,36
-                    C14,32 30,31 46,36 C62,41 74,50 80,58 Z"
-                    fill="url(#homa-wing-l)" opacity="0.95"/>
+                <!-- ══ LION PAWS — rear feet ══ -->
+                <g filter="url(#gs-relief)" opacity="0.85">
+                  <!-- Rear left leg -->
+                  <path d="M130,88 C128,96 126,103 124,110" stroke="#a07428" stroke-width="3" stroke-linecap="round" fill="none"/>
+                  <!-- Paw toes left (blunt, not talons) -->
+                  <path d="M124,110 C120,113 117,114 116,112" stroke="#8a6020" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                  <path d="M124,110 C122,114 121,117 121,117" stroke="#8a6020" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                  <path d="M124,110 C126,114 128,116 127,117" stroke="#8a6020" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                  <!-- Rear right leg -->
+                  <path d="M148,86 C148,95 148,102 148,110" stroke="#a07428" stroke-width="3" stroke-linecap="round" fill="none"/>
+                  <!-- Paw toes right -->
+                  <path d="M148,110 C144,113 141,114 140,112" stroke="#8a6020" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                  <path d="M148,110 C146,114 145,117 145,117" stroke="#8a6020" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                  <path d="M148,110 C151,114 153,116 152,117" stroke="#8a6020" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                </g>
 
+                <!-- ══ LION TAIL — curled upward with tuft ══ -->
+                <g class="griffin-tail" filter="url(#gs-relief)">
+                  <!-- Tail curves up then curls into Persepolis volute -->
+                  <path d="M157,70 C165,65 172,60 175,52 C177,46 174,41 169,42 C164,43 162,49 164,56"
+                    stroke="#c9920e" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                  <!-- Volute curl at tip -->
+                  <path d="M164,56 C166,50 170,48 172,51 C174,54 171,59 167,59 C164,59 162,56 164,53"
+                    stroke="#e8b84b" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.9"/>
+                  <!-- Lion tail tuft (hair bristles at very end) -->
+                  <path d="M175,52 C177,48 179,45 178,42" stroke="#e8c060" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+                  <path d="M175,52 C178,49 181,47 181,44" stroke="#c9920e" stroke-width="1"   fill="none" stroke-linecap="round" opacity="0.6"/>
+                  <path d="M175,52 C177,52 180,52 181,50" stroke="#b8832a" stroke-width="0.9"  fill="none" stroke-linecap="round" opacity="0.55"/>
+                </g>
+
+                <!-- ══ EAGLE WINGS — sprout from lion's shoulder/back ══ -->
+                <!-- Upper wing: sweeping back over body -->
+                <g class="griffin-wings-left" filter="url(#gs-relief)">
+                  <!-- Primary wing layer — large broad sweep upward -->
+                  <path d="M72,64 C62,52 44,40 22,30 C8,24 2,26 4,32
+                            C14,28 28,32 50,44 C68,54 76,64 78,68 Z"
+                    fill="url(#gs-wing)" opacity="0.92"/>
                   <!-- Secondary feather row -->
-                  <path d="M78,62
-                    C68,57 54,52 38,47 C24,43 12,43 6,45
-                    C14,41 26,41 42,46 C58,51 70,58 78,64 Z"
-                    fill="#c9920e" opacity="0.75"/>
-
-                  <!-- Tertiary feather row -->
-                  <path d="M78,67
-                    C70,63 57,59 44,56 C32,53 20,53 14,55
-                    C22,51 34,51 48,55 C62,59 72,64 78,68 Z"
+                  <path d="M72,68 C60,58 42,48 22,38 C10,32 4,34 6,40
+                            C16,36 30,40 52,52 C68,60 74,68 78,72 Z"
+                    fill="#c9920e" opacity="0.7"/>
+                  <!-- Tertiary row -->
+                  <path d="M74,73 C64,65 50,57 36,52 C24,47 14,48 12,53
+                            C20,50 34,52 50,58 C64,64 72,72 76,76 Z"
                     fill="#e8b84b" opacity="0.5"/>
-
-                  <!-- Quaternary (coverts) -->
-                  <path d="M78,71
-                    C72,68 62,65 52,63 C42,61 32,62 26,63
-                    C34,60 44,59 56,62 C68,65 74,69 79,72 Z"
-                    fill="#f0cc6a" opacity="0.35"/>
-
-                  <!-- Individual primary feather tip lines (bas-relief engraving) -->
-                  <line x1="10"  y1="36" x2="6"   y2="42" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.9"/>
-                  <line x1="18"  y1="35" x2="13"  y2="41" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
-                  <line x1="26"  y1="34" x2="21"  y2="40" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.8"/>
-                  <line x1="34"  y1="35" x2="30"  y2="41" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
-                  <line x1="42"  y1="37" x2="38"  y2="43" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
-                  <line x1="50"  y1="40" x2="47"  y2="46" stroke="#9a6c20" stroke-width="0.7" stroke-linecap="round" opacity="0.6"/>
-                  <line x1="58"  y1="43" x2="55"  y2="49" stroke="#b8832a" stroke-width="0.7" stroke-linecap="round" opacity="0.55"/>
-                  <line x1="66"  y1="47" x2="63"  y2="53" stroke="#b8832a" stroke-width="0.6" stroke-linecap="round" opacity="0.5"/>
-                  <!-- Feather quill separation lines (the horizontal scallop rows) -->
-                  <path d="M14,47 Q28,45 42,48 Q58,51 70,56" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.5"/>
-                  <path d="M22,53 Q36,51 50,54 Q64,57 74,61" stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.4"/>
-                  <path d="M32,59 Q46,57 58,60 Q70,63 76,67" stroke="#9a6c20" stroke-width="0.5" fill="none" opacity="0.35"/>
+                  <!-- Covert row -->
+                  <path d="M75,78 C67,72 56,67 46,64 C36,61 28,62 26,66
+                            C34,63 44,64 56,68 C68,72 74,78 76,80 Z"
+                    fill="#f0cc6a" opacity="0.32"/>
+                  <!-- Primary feather tip engravings -->
+                  <line x1="6"   y1="32" x2="2"   y2="40" stroke="#6a4810" stroke-width="1"   stroke-linecap="round" opacity="0.85"/>
+                  <line x1="14"  y1="30" x2="10"  y2="38" stroke="#6a4810" stroke-width="0.9" stroke-linecap="round" opacity="0.8"/>
+                  <line x1="22"  y1="29" x2="18"  y2="37" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.75"/>
+                  <line x1="30"  y1="30" x2="26"  y2="38" stroke="#7a5518" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
+                  <line x1="38"  y1="32" x2="35"  y2="40" stroke="#8a6520" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+                  <line x1="46"  y1="36" x2="43"  y2="44" stroke="#9a7028" stroke-width="0.7" stroke-linecap="round" opacity="0.6"/>
+                  <line x1="54"  y1="40" x2="52"  y2="48" stroke="#9a7028" stroke-width="0.7" stroke-linecap="round" opacity="0.55"/>
+                  <line x1="62"  y1="46" x2="60"  y2="54" stroke="#b8832a" stroke-width="0.6" stroke-linecap="round" opacity="0.5"/>
+                  <!-- Feather scallop quill rows -->
+                  <path d="M10,38 Q28,36 46,40 Q62,44 72,52" stroke="#6a4810" stroke-width="0.6" fill="none" opacity="0.45"/>
+                  <path d="M16,46 Q34,44 50,48 Q64,52 74,58" stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.38"/>
+                  <path d="M24,54 Q40,52 56,56 Q68,59 76,65" stroke="#8a6020" stroke-width="0.5" fill="none" opacity="0.3"/>
                 </g>
 
-                <!-- ── RIGHT WING ── -->
-                <g filter="url(#homa-relief)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="0,0; 0,-2.5; 0,0" dur="4s" repeatCount="indefinite"
-                    calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
-                    additive="sum"/>
-
-                  <path d="M82,58
-                    C90,52 102,46 118,40 C132,35 146,34 154,36
-                    C146,32 130,31 114,36 C98,41 86,50 80,58 Z"
-                    fill="url(#homa-wing-r)" opacity="0.95"/>
-                  <path d="M82,62
-                    C92,57 106,52 122,47 C136,43 148,43 154,45
-                    C146,41 134,41 118,46 C102,51 90,58 82,64 Z"
-                    fill="#c9920e" opacity="0.75"/>
-                  <path d="M82,67
-                    C90,63 103,59 116,56 C128,53 140,53 146,55
-                    C138,51 126,51 112,55 C98,59 88,64 82,68 Z"
-                    fill="#e8b84b" opacity="0.5"/>
-                  <path d="M82,71
-                    C88,68 98,65 108,63 C118,61 128,62 134,63
-                    C126,60 116,59 104,62 C92,65 86,69 81,72 Z"
-                    fill="#f0cc6a" opacity="0.35"/>
-
-                  <line x1="150" y1="36" x2="154" y2="42" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.9"/>
-                  <line x1="142" y1="35" x2="147" y2="41" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
-                  <line x1="134" y1="34" x2="139" y2="40" stroke="#7a5518" stroke-width="0.9" stroke-linecap="round" opacity="0.8"/>
-                  <line x1="126" y1="35" x2="130" y2="41" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
-                  <line x1="118" y1="37" x2="122" y2="43" stroke="#9a6c20" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
-                  <line x1="110" y1="40" x2="113" y2="46" stroke="#9a6c20" stroke-width="0.7" stroke-linecap="round" opacity="0.6"/>
-                  <line x1="102" y1="43" x2="105" y2="49" stroke="#b8832a" stroke-width="0.7" stroke-linecap="round" opacity="0.55"/>
-                  <line x1="94"  y1="47" x2="97"  y2="53" stroke="#b8832a" stroke-width="0.6" stroke-linecap="round" opacity="0.5"/>
-                  <path d="M146,47 Q132,45 118,48 Q102,51 90,56" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.5"/>
-                  <path d="M138,53 Q124,51 110,54 Q96,57 86,61"  stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.4"/>
-                  <path d="M128,59 Q114,57 102,60 Q90,63 84,67"  stroke="#9a6c20" stroke-width="0.5" fill="none" opacity="0.35"/>
+                <!-- ══ EAGLE NECK ══ -->
+                <g filter="url(#gs-relief)">
+                  <!-- Neck arching forward and upward, strong eagle posture -->
+                  <path d="M58,65 C54,56 52,46 54,38 C56,31 61,28 64,31
+                            C67,35 66,46 64,64 Z"
+                    fill="url(#gs-body)" opacity="0.95"/>
+                  <!-- Neck feather rows -->
+                  <path d="M58,60 Q61,57 64,60" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.5"/>
+                  <path d="M57,54 Q61,51 64,54" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.45"/>
+                  <path d="M57,48 Q61,46 64,48" stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.4"/>
+                  <!-- Neck-body feather ruff -->
+                  <path d="M54,65 Q62,61 70,65 Q65,70 58,69 Z" fill="#c9920e" opacity="0.55"/>
                 </g>
 
-                <!-- ── BODY (central torso, scaled like Persepolis carving) ── -->
-                <g filter="url(#homa-relief)">
-                  <!-- Main body mass -->
-                  <ellipse cx="80" cy="72" rx="18" ry="22" fill="url(#homa-stone)" opacity="0.95"/>
-                  <!-- Body scale rows (Persepolis birds have scaled/feathered breast detail) -->
-                  <path d="M66,63 Q80,60 94,63" stroke="#7a5518" stroke-width="0.8" fill="none" opacity="0.6"/>
-                  <path d="M64,68 Q80,65 96,68" stroke="#7a5518" stroke-width="0.8" fill="none" opacity="0.6"/>
-                  <path d="M63,73 Q80,70 97,73" stroke="#7a5518" stroke-width="0.7" fill="none" opacity="0.55"/>
-                  <path d="M64,78 Q80,75 96,78" stroke="#7a5518" stroke-width="0.7" fill="none" opacity="0.5"/>
-                  <path d="M66,83 Q80,80 94,83" stroke="#9a6c20" stroke-width="0.6" fill="none" opacity="0.45"/>
-                  <!-- Chest highlight -->
-                  <ellipse cx="80" cy="68" rx="9" ry="7" fill="#e8c060" opacity="0.15"/>
+                <!-- ══ EAGLE HEAD — profile facing right ══ -->
+                <g filter="url(#gs-relief)">
+                  <!-- Head mass -->
+                  <ellipse cx="66" cy="28" rx="13" ry="10" fill="url(#gs-body)" opacity="0.95"/>
+
+                  <!-- Fierce hooked eagle beak — the defining feature -->
+                  <!-- Upper mandible: curves sharply down -->
+                  <path d="M76,24 C83,21 91,21 93,24 C93,28 89,31 83,30 C87,28 88,25 84,25 Z"
+                    fill="#c9920e" opacity="0.92"/>
+                  <path d="M76,24 C82,21 88,21 93,24" stroke="#7a5518" stroke-width="0.8" fill="none" opacity="0.7"/>
+                  <!-- Lower mandible (slightly open) -->
+                  <path d="M77,28 C82,30 87,30 90,28" stroke="#9a6c20" stroke-width="0.7" fill="none" opacity="0.6"/>
+                  <!-- Mouth gap line -->
+                  <path d="M77,27 C82,27 87,27 90,26" stroke="#5a3808" stroke-width="0.5" fill="none" opacity="0.5"/>
+
+                  <!-- Eagle eye — large, fierce, with pronounced orbital brow -->
+                  <ellipse cx="70" cy="25" rx="4" ry="3" fill="#1a0c00" opacity="0.92"/>
+                  <ellipse cx="70" cy="25" rx="2"  ry="1.5" fill="#e8b84b" opacity="0.5"/>
+                  <circle  cx="71" cy="24.5" r="0.6" fill="#fff" opacity="0.35"/>
+                  <!-- Brow ridge: prominent sharp angle = fierce eagle expression -->
+                  <path d="M66,22 L72,21 L75,23" stroke="#5a3808" stroke-width="1"   fill="none" stroke-linecap="round" opacity="0.75"/>
+                  <path d="M66,22 L72,21 L75,23" stroke="#e8b84b" stroke-width="0.4" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+                  <!-- ══ CREST PLUMES — CSS griffin-crest-a/b/c ══ -->
+                  <path class="griffin-crest-a"
+                    d="M60,22 C58,15 56,9 55,4 C57,8 59,14 60,21 Z"
+                    fill="#e8b84b" opacity="0.88"/>
+                  <path class="griffin-crest-b"
+                    d="M63,21 C62,14 61,8 61,3 C62,7 63,13 63,20 Z"
+                    fill="#f0cc6a" opacity="0.8"/>
+                  <path class="griffin-crest-c"
+                    d="M66,20 C66,13 67,7 67,2 C67,6 67,12 67,20 Z"
+                    fill="#c9920e" opacity="0.72"/>
+                  <!-- Crest base volute -->
+                  <path d="M58,24 C56,21 55,18 57,17 C59,16 62,18 61,21"
+                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.65"/>
+
+                  <!-- Ear tuft (Achaemenid griffins have pointed ear tufts) -->
+                  <path d="M58,20 C56,16 55,12 57,10 C58,14 58,17 58,20 Z"
+                    fill="#c9920e" opacity="0.6"/>
                 </g>
 
-                <!-- ── TAIL FAN (spread, with curled volute tips — signature Persepolis detail) ── -->
-                <g filter="url(#homa-relief)">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="0,0; 0,1.2; 0,0" dur="4s" repeatCount="indefinite"
-                    calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
-                    additive="sum"/>
+                <!-- ══ TORCH-LIGHT GLOW — CSS griffin-glow ══ -->
+                <ellipse class="griffin-glow" cx="95" cy="72" rx="85" ry="50" fill="url(#gs-glow)"/>
 
-                  <!-- Fan base -->
-                  <path d="M80,90 C74,96 66,100 60,98 C65,95 72,92 80,92 Z"
-                    fill="#c9920e" opacity="0.85"/>
-                  <path d="M80,90 C76,98 72,104 68,104 C70,100 75,95 80,92 Z"
-                    fill="#b8832a" opacity="0.8"/>
-                  <path d="M80,90 C80,100 80,107 79,108 C79,103 79,97 80,92 Z"
-                    fill="#e8b84b" opacity="0.75"/>
-                  <path d="M80,90 C84,98 88,104 92,104 C90,100 85,95 80,92 Z"
-                    fill="#b8832a" opacity="0.8"/>
-                  <path d="M80,90 C86,96 94,100 100,98 C95,95 88,92 80,92 Z"
-                    fill="#c9920e" opacity="0.85"/>
-                  <!-- Volute curls at tail tips (signature detail) -->
-                  <path d="M60,98 C58,100 57,103 59,104 C61,105 63,103 62,101"
-                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.8"/>
-                  <path d="M68,104 C67,107 67,110 69,110 C71,110 72,108 71,106"
-                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.75"/>
-                  <path d="M79,108 C79,111 80,114 82,113 C84,112 84,110 82,109"
-                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.7"/>
-                  <path d="M92,104 C93,107 93,110 91,110 C89,110 88,108 89,106"
-                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.75"/>
-                  <path d="M100,98 C102,100 103,103 101,104 C99,105 97,103 98,101"
-                    stroke="#e8b84b" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.8"/>
-                  <!-- Tail quill lines -->
-                  <line x1="80" y1="90" x2="61"  y2="99" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
-                  <line x1="80" y1="90" x2="69"  y2="103" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
-                  <line x1="80" y1="90" x2="79"  y2="107" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
-                  <line x1="80" y1="90" x2="91"  y2="103" stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
-                  <line x1="80" y1="90" x2="99"  y2="99"  stroke="#7a5518" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
-                </g>
-
-                <!-- ── NECK & HEAD ── -->
-                <g filter="url(#homa-relief)">
-                  <!-- Neck -->
-                  <path d="M74,58 C73,52 74,46 77,42 C80,38 83,37 84,40 C85,44 83,50 82,58 Z"
-                    fill="url(#homa-stone)" opacity="0.95"/>
-                  <!-- Neck scale / feather lines -->
-                  <path d="M74,55 Q79,53 83,55" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.55"/>
-                  <path d="M74,51 Q79,49 83,51" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.5"/>
-                  <path d="M75,47 Q79,45 83,47" stroke="#7a5518" stroke-width="0.5" fill="none" opacity="0.45"/>
-
-                  <!-- Head — profile, facing right, like Persepolis birds -->
-                  <ellipse cx="86" cy="38" rx="9" ry="7" fill="url(#homa-stone)" opacity="0.95"/>
-
-                  <!-- Hooked raptor beak (profile, right-facing) -->
-                  <path d="M94,36 C98,35 101,34 101,36 C101,38 98,39 95,39 C97,38 98,37 96,37 Z"
-                    fill="#c9920e" opacity="0.9"/>
-                  <!-- Beak ridge line -->
-                  <path d="M94,36 C97,35 100,34.5 101,36" stroke="#7a5518" stroke-width="0.7" fill="none" opacity="0.7"/>
-
-                  <!-- Eye — large, almond-shaped, Achaemenid style -->
-                  <ellipse cx="90" cy="36" rx="3" ry="2.2" fill="#1a0c00" opacity="0.9"/>
-                  <ellipse cx="90" cy="36" rx="1.5" ry="1.2" fill="#e8b84b" opacity="0.6"/>
-                  <!-- Eye lid line -->
-                  <path d="M87,35 Q90,33.5 93,35" stroke="#7a5518" stroke-width="0.6" fill="none" opacity="0.6"/>
-
-                  <!-- Crest — multiple upswept plumes, key Homa identifier -->
-                  <path d="M82,32 C81,26 79,21 78,16 C79,20 81,25 82,31 Z"
-                    fill="#e8b84b" opacity="0.85">
-                    <animate attributeName="d"
-                      values="M82,32 C81,26 79,21 78,16 C79,20 81,25 82,31 Z;
-                              M82,32 C82,26 80,20 79,15 C80,19 82,24 82,31 Z;
-                              M82,32 C81,26 79,21 78,16 C79,20 81,25 82,31 Z"
-                      dur="3.5s" repeatCount="indefinite"
-                      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
-                  </path>
-                  <path d="M84,31 C84,25 83,19 82,14 C83,18 85,24 85,31 Z"
-                    fill="#f0cc6a" opacity="0.8">
-                    <animate attributeName="d"
-                      values="M84,31 C84,25 83,19 82,14 C83,18 85,24 85,31 Z;
-                              M84,31 C85,25 84,18 83,13 C84,17 86,23 85,31 Z;
-                              M84,31 C84,25 83,19 82,14 C83,18 85,24 85,31 Z"
-                      dur="3.5s" begin="0.4s" repeatCount="indefinite"
-                      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
-                  </path>
-                  <path d="M86,31 C87,25 87,19 87,14 C87,18 87,24 87,31 Z"
-                    fill="#c9920e" opacity="0.7">
-                    <animate attributeName="d"
-                      values="M86,31 C87,25 87,19 87,14 C87,18 87,24 87,31 Z;
-                              M86,31 C87,24 88,18 88,13 C88,17 88,23 87,31 Z;
-                              M86,31 C87,25 87,19 87,14 C87,18 87,24 87,31 Z"
-                      dur="3.5s" begin="0.8s" repeatCount="indefinite"
-                      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
-                  </path>
-                  <!-- Crest volute base curl -->
-                  <path d="M80,33 C78,31 77,29 79,28 C81,27 83,29 82,31"
-                    stroke="#e8b84b" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.7"/>
-                </g>
-
-                <!-- ── LEGS (short, Persepolis birds have bird-of-prey talons) ── -->
-                <g filter="url(#homa-relief)" opacity="0.8">
-                  <!-- Left leg -->
-                  <line x1="74" y1="90" x2="70" y2="100" stroke="#a07428" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="70" y1="100" x2="64" y2="105" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
-                  <line x1="70" y1="100" x2="68" y2="106" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
-                  <line x1="70" y1="100" x2="72" y2="106" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
-                  <!-- Right leg -->
-                  <line x1="86" y1="90" x2="90" y2="100" stroke="#a07428" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="90" y1="100" x2="84" y2="106" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
-                  <line x1="90" y1="100" x2="90" y2="107" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
-                  <line x1="90" y1="100" x2="96" y2="105" stroke="#a07428" stroke-width="1.2" stroke-linecap="round"/>
-                </g>
-
-                <!-- ── TORCH-LIGHT GLOW OVERLAY (flicker animation) ── -->
-                <ellipse cx="80" cy="68" rx="55" ry="45" fill="url(#homa-glow)">
-                  <animate attributeName="opacity" values="0.7;1;0.6;0.95;0.7" dur="5s" repeatCount="indefinite"/>
-                </ellipse>
-
-                <!-- ── STONE SURFACE TEXTURE DOTS (Persepolis carving grain) ── -->
-                <g opacity="0.12" fill="#f5deb3">
-                  <circle cx="30" cy="55" r="0.8"/><circle cx="44" cy="50" r="0.7"/>
-                  <circle cx="58" cy="47" r="0.8"/><circle cx="20" cy="62" r="0.6"/>
-                  <circle cx="36" cy="60" r="0.7"/><circle cx="50" cy="57" r="0.8"/>
-                  <circle cx="120" cy="55" r="0.8"/><circle cx="106" cy="50" r="0.7"/>
-                  <circle cx="92" cy="47" r="0.8"/><circle cx="130" cy="62" r="0.6"/>
-                  <circle cx="114" cy="60" r="0.7"/><circle cx="100" cy="57" r="0.8"/>
-                  <circle cx="72" cy="72" r="0.7"/><circle cx="80" cy="76" r="0.8"/>
-                  <circle cx="88" cy="72" r="0.7"/><circle cx="76" cy="80" r="0.6"/>
+                <!-- ══ STONE GRAIN TEXTURE ══ -->
+                <g opacity="0.1" fill="#f5deb3">
+                  <circle cx="72" cy="72" r="0.8"/><circle cx="90" cy="68" r="0.7"/>
+                  <circle cx="110" cy="65" r="0.8"/><circle cx="128" cy="66" r="0.7"/>
+                  <circle cx="145" cy="68" r="0.8"/><circle cx="80"  cy="80" r="0.6"/>
+                  <circle cx="98"  cy="79" r="0.7"/><circle cx="116" cy="79" r="0.8"/>
+                  <circle cx="134" cy="78" r="0.7"/><circle cx="152" cy="75" r="0.6"/>
+                  <circle cx="60"  cy="76" r="0.7"/><circle cx="70"  cy="85" r="0.8"/>
                 </g>
               </svg>
             </div>
@@ -346,8 +279,7 @@
                     </animateMotion>
                   </circle>
                   <!-- Sun disc core -->
-                  <circle r="3.5" fill="#d4a017" opacity="0.9">
-                    <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" repeatCount="indefinite"/>
+                  <circle class="ra-disc-core" r="3.5" fill="#d4a017" opacity="0.9">
                     <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0.5;1" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1">
                       <mpath href="#ra-path"/>
                     </animateMotion>
@@ -412,38 +344,27 @@
                 <!-- Thunderbolt shape: classic winged Zeus bolt -->
                 <g>
                   <!-- Main bolt body -->
-                  <path d="M34,6 L22,30 L30,30 L26,54 L38,28 L30,28 Z"
-                    fill="#a8c4e0" opacity="0.85">
-                    <animate attributeName="opacity" values="0.85;1;0.5;1;0.85" dur="3s" repeatCount="indefinite"/>
-                  </path>
+                  <path class="bolt-body" d="M34,6 L22,30 L30,30 L26,54 L38,28 L30,28 Z"
+                    fill="#a8c4e0" opacity="0.85"/>
                   <!-- Bolt bright core -->
-                  <path d="M33,10 L24,29 L31,29 L27,50 L36,30 L30.5,30 Z"
-                    fill="white" opacity="0.0">
-                    <animate attributeName="opacity" values="0;0;0.6;0;0;0;0.4;0;0" dur="3s" repeatCount="indefinite"/>
-                  </path>
+                  <path class="bolt-core" d="M33,10 L24,29 L31,29 L27,50 L36,30 L30.5,30 Z"
+                    fill="white" opacity="0"/>
                 </g>
 
                 <!-- Electric arc sparks emanating from bolt tip -->
-                <g opacity="0">
+                <g class="bolt-sparks" opacity="0">
                   <line x1="26" y1="54" x2="20" y2="58" stroke="#a8c4e0" stroke-width="0.8" stroke-linecap="round"/>
                   <line x1="26" y1="54" x2="32" y2="58" stroke="#a8c4e0" stroke-width="0.8" stroke-linecap="round"/>
                   <line x1="26" y1="54" x2="26" y2="59" stroke="#a8c4e0" stroke-width="0.8" stroke-linecap="round"/>
-                  <animate attributeName="opacity" values="0;0;0;1;0;0;1;0;0" dur="3s" repeatCount="indefinite"/>
                 </g>
 
                 <!-- Top wing left -->
-                <path d="M34,6 L28,10 L26,16 L30,14 Z" fill="#a8c4e0" opacity="0.4">
-                  <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/>
-                </path>
+                <path class="bolt-wing" d="M34,6 L28,10 L26,16 L30,14 Z" fill="#a8c4e0" opacity="0.4"/>
                 <!-- Top wing right -->
-                <path d="M34,6 L40,10 L42,16 L38,14 Z" fill="#a8c4e0" opacity="0.4">
-                  <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/>
-                </path>
+                <path class="bolt-wing" d="M34,6 L40,10 L42,16 L38,14 Z" fill="#a8c4e0" opacity="0.4"/>
 
                 <!-- Glow halo behind bolt -->
-                <ellipse cx="30" cy="30" rx="10" ry="22" fill="none" stroke="#a8c4e0" stroke-width="3" opacity="0">
-                  <animate attributeName="opacity" values="0;0;0.12;0;0;0;0.08;0;0" dur="3s" repeatCount="indefinite"/>
-                </ellipse>
+                <ellipse class="bolt-halo" cx="30" cy="30" rx="10" ry="22" fill="none" stroke="#a8c4e0" stroke-width="3" opacity="0"/>
 
               </svg>
             </div>
