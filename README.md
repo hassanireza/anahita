@@ -1,4 +1,4 @@
-[![ANAHITA Banner](assets/images/banner.png)](hassanireza.github.io/anahita/)
+[![ANAHITA Banner](assets/images/banner.webp)](hassanireza.github.io/anahita/)
 
 # 🌌 ANAHITA
 
