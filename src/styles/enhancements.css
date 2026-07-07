@@ -1,0 +1,297 @@
+/* ==========================================================================
+   ANAHITA React Enhancements
+   Additive styles for features introduced during the TypeScript/React
+   migration: search and filter, favorites, the deity detail modal,
+   back-to-top control, and the random deity action. These rules are kept
+   separate from the ported main.css / pages.css so the original visual
+   language stays easy to diff against the legacy site.
+   ========================================================================== */
+
+.toolbar {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-search {
+  position: relative;
+  flex: 1 1 320px;
+  max-width: 420px;
+}
+
+.toolbar-search input {
+  width: 100%;
+  background: rgba(20, 16, 10, 0.7);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.65rem 1rem 0.65rem 2.4rem;
+  border-radius: 999px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toolbar-search input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.toolbar-search svg {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.toolbar-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-chip {
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  background: transparent;
+  color: var(--parchment);
+  font-family: var(--font-title);
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filter-chip:hover { border-color: var(--gold); color: var(--gold-light); }
+
+.filter-chip.active {
+  background: var(--gold);
+  color: #1a1406;
+  border-color: var(--gold);
+}
+
+.toolbar-random {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.5);
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--gold-light);
+  font-family: var(--font-title);
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.toolbar-random:hover {
+  background: var(--gold);
+  color: #1a1406;
+  transform: translateY(-1px);
+}
+
+.result-count {
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin: -1.5rem auto 2rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Favorite toggle star, layered on top of any card */
+.favorite-toggle {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 8, 6, 0.55);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.favorite-toggle:hover { transform: scale(1.1); border-color: var(--gold); }
+.favorite-toggle.active svg { fill: var(--gold); }
+.favorite-toggle svg { transition: fill 0.2s ease; }
+
+/* Deity detail modal */
+.deity-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 3, 2, 0.86);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.25s ease;
+}
+
+.deity-modal {
+  max-width: 780px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: linear-gradient(160deg, #14100a, #0a0806);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 720px) {
+  .deity-modal { grid-template-columns: 1fr; }
+}
+
+.deity-modal-image {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.deity-modal-body {
+  padding: 2rem 2.2rem;
+}
+
+.deity-modal-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 50%;
+  color: var(--parchment);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.deity-modal-close:hover { border-color: var(--gold); color: var(--gold); }
+
+.deity-modal-name {
+  font-family: var(--font-title);
+  font-size: 1.9rem;
+  color: var(--gold-light);
+  margin-bottom: 0.3rem;
+}
+
+.deity-modal-native {
+  opacity: 0.75;
+  font-style: italic;
+  margin-bottom: 0.6rem;
+}
+
+.deity-modal-role {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+}
+
+.deity-modal-role.evil { color: #e08a7a; border-color: rgba(224, 138, 122, 0.45); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Back to top */
+.back-to-top {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  background: rgba(10, 8, 6, 0.75);
+  color: var(--gold-light);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 60;
+  backdrop-filter: blur(3px);
+}
+
+.back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.back-to-top:hover { border-color: var(--gold); background: rgba(201, 168, 76, 0.15); }
+
+/* Clickable card affordance without altering the original layout */
+.clickable-card { cursor: pointer; }
+
+.route-fade { animation: routeFade 0.4s ease; }
+@keyframes routeFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.not-found {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 4rem 1.5rem;
+}
+
+.not-found h1 {
+  font-family: var(--font-title);
+  font-size: 4rem;
+  color: var(--gold);
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--gold);
+  color: #1a1406;
+  padding: 0.6rem 1rem;
+  z-index: 1000;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus { left: 0; }

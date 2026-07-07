@@ -1,0 +1,61 @@
+<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, serif">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0806"/>
+      <stop offset="1" stop-color="#120e08"/>
+    </linearGradient>
+    <style>
+      .cls { fill: #14100a; stroke: #c9a84c; stroke-width: 1.2; }
+      .hdr { fill: #241a08; stroke: #c9a84c; stroke-width: 1.2; }
+      .name { fill: #f0d98c; font-size: 14px; font-weight: bold; }
+      .field { fill: #d8c799; font-size: 11px; }
+      .method { fill: #a99763; font-size: 11px; font-style: italic; }
+      .rel { stroke: #c9a84c; stroke-width: 1; fill: none; }
+    </style>
+  </defs>
+  <rect width="900" height="500" fill="url(#bgGrad2)"/>
+  <text x="450" y="32" text-anchor="middle" class="name" font-size="18">DOMAIN MODEL — CLASS RELATIONSHIPS</text>
+
+  <rect x="340" y="60" width="220" height="90" class="cls"/>
+  <rect x="340" y="60" width="220" height="26" class="hdr"/>
+  <text x="450" y="78" text-anchor="middle" class="name">PantheonRegistry</text>
+  <text x="352" y="102" class="field">- pantheons: Map&lt;string, Pantheon&gt;</text>
+  <text x="352" y="118" class="method">+ get(id) · randomDeity() · searchAll()</text>
+  <text x="352" y="134" class="method">+ totalDeities</text>
+
+  <rect x="340" y="190" width="220" height="110" class="cls"/>
+  <rect x="340" y="190" width="220" height="26" class="hdr"/>
+  <text x="450" y="208" text-anchor="middle" class="name">Pantheon</text>
+  <text x="352" y="232" class="field">id, name, title, tagline</text>
+  <text x="352" y="248" class="field">groups: DeityGroupModel[]</text>
+  <text x="352" y="266" class="method">+ search() · randomDeity()</text>
+  <text x="352" y="282" class="method">+ findById() · allDeities</text>
+
+  <rect x="80" y="340" width="220" height="90" class="cls"/>
+  <rect x="80" y="340" width="220" height="26" class="hdr"/>
+  <text x="190" y="358" text-anchor="middle" class="name">DeityGroupModel</text>
+  <text x="92" y="382" class="field">id, title, eyebrow</text>
+  <text x="92" y="398" class="field">deities: Deity[]</text>
+  <text x="92" y="414" class="method">+ search(query, alignment)</text>
+
+  <rect x="600" y="340" width="220" height="130" class="cls"/>
+  <rect x="600" y="340" width="220" height="26" class="hdr"/>
+  <text x="710" y="358" text-anchor="middle" class="name">Deity</text>
+  <text x="612" y="382" class="field">id, name, nativeText</text>
+  <text x="612" y="398" class="field">role, alignment, description</text>
+  <text x="612" y="414" class="field">image: string | null</text>
+  <text x="612" y="432" class="method">+ matches(query) · excerpt()</text>
+  <text x="612" y="448" class="method">+ isAligned(alignment)</text>
+
+  <path class="rel" d="M450,150 V186"/>
+  <text x="460" y="172" class="method">1..3</text>
+
+  <path class="rel" d="M340,260 C260,290 220,310 200,336"/>
+  <text x="240" y="300" class="method">1..n</text>
+
+  <path class="rel" d="M560,260 C650,290 700,310 710,336"/>
+  <text x="620" y="300" class="method">1..n</text>
+
+  <path class="rel" d="M300,385 H600" stroke-dasharray="4 3"/>
+  <text x="450" y="378" text-anchor="middle" class="method">owns</text>
+</svg>
