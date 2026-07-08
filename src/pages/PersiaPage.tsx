@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { usePantheonExplorer } from "../hooks/usePantheonExplorer";
 import { persia } from "../data/registry";
+import { assetUrl } from "../utils/assetUrl";
 
 export function PersiaPage() {
   const explorer = usePantheonExplorer(persia);
@@ -153,7 +154,7 @@ export function PersiaPage() {
                   {deity.image && (
                     <img
                       className="yazata-img"
-                      src={deity.image}
+                      src={assetUrl(deity.image)}
                       alt={deity.name}
                       loading="lazy"
                       onError={(event) => {

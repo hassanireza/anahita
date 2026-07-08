@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import type { Deity } from "../models/Deity";
+import { assetUrl } from "../utils/assetUrl";
 
 interface DeityModalProps {
   deity: Deity | null;
@@ -43,7 +44,7 @@ export function DeityModal({ deity, onClose, isFavorite, onToggleFavorite }: Dei
         {deity.image ? (
           <img
             className="deity-modal-image"
-            src={deity.image}
+            src={assetUrl(deity.image)}
             alt={deity.name}
             onError={(event) => {
               event.currentTarget.style.cssText =

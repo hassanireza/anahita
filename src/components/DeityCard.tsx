@@ -1,5 +1,6 @@
 import type { MouseEvent } from "react";
 import type { Deity } from "../models/Deity";
+import { assetUrl } from "../utils/assetUrl";
 
 interface DeityCardProps {
   deity: Deity;
@@ -49,7 +50,7 @@ export function DeityCard({ deity, variant, reversed, isFavorite, onToggleFavori
       className={
         variant === "persian" ? "persian-god-img" : variant === "egypt" ? "egypt-god-img" : "greek-god-img"
       }
-      src={deity.image}
+      src={assetUrl(deity.image)}
       alt={deity.name}
       loading="lazy"
       onError={(event) => {
