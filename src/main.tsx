@@ -2,9 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import "./styles/main.css";
+import "./styles/tokens.css";
+import "./styles/art.css";
+import "./styles/components.css";
 import "./styles/pages.css";
-import "./styles/enhancements.css";
 
 // Restore the original deep-link path saved by public/404.html's
 // redirect script, so a hard refresh on /anahita/persia works even

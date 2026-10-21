@@ -1,75 +1,64 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { LogoMark, Icon } from "../art/core";
+import { Crest } from "../art/emblems";
 
 const LINKS = [
-  { to: "/persia", label: "Persia" },
-  { to: "/egypt", label: "Egypt" },
-  { to: "/greek", label: "Greece" },
-];
+  { to: "/persia", label: "Persia", civ: "persia", sub: "Wisdom · The Sacred Flame" },
+  { to: "/egypt", label: "Egypt", civ: "egypt", sub: "Strength · The Eternal Nile" },
+  { to: "/greek", label: "Greece", civ: "greek", sub: "Beauty · Mount Olympus" },
+] as const;
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const on = () => setScrolled(window.scrollY > 40);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-  }, [menuOpen]);
-
-  useEffect(() => {
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+    document.body.classList.toggle("scroll-locked", open);
+    const key = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", key);
+    return () => {
+      document.removeEventListener("keydown", key);
+      document.body.classList.remove("scroll-locked");
     };
-    document.addEventListener("keydown", handleKey);
-    return () => document.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [open]);
 
   return (
     <>
-      <nav className={`site-nav${scrolled ? " scrolled" : ""}`}>
-        <NavLink to="/" className="nav-logo">
-          ANAHITA
+      <nav className={`site-nav${scrolled ? " scrolled" : ""}`} aria-label="Primary">
+        <NavLink to="/" className="nav-logo" aria-label="Anahita, home">
+          <LogoMark size={34} />
+          <span>ANAHITA</span>
         </NavLink>
         <ul className="nav-links">
-          {LINKS.map((link) => (
-            <li key={link.to}>
-              <NavLink to={link.to} className={({ isActive }) => (isActive ? "active" : "")}>
-                {link.label}
-              </NavLink>
+          {LINKS.map((l) => (
+            <li key={l.to}>
+              <NavLink to={l.to} className={({ isActive }) => (isActive ? "active" : "")}>{l.label}</NavLink>
             </li>
           ))}
         </ul>
-        <button
-          className="nav-hamburger"
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(true)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+        <button className="nav-burger" aria-label="Open menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
+          <span /><span /><span />
         </button>
       </nav>
 
-      <div
-        className={`nav-mobile-menu${menuOpen ? " open" : ""}`}
-        onClick={(event) => {
-          if (event.target === event.currentTarget) setMenuOpen(false);
-        }}
-      >
-        <button className="nav-mobile-close" onClick={() => setMenuOpen(false)}>
-          CLOSE
-        </button>
-        {LINKS.map((link) => (
-          <NavLink key={link.to} to={link.to} onClick={() => setMenuOpen(false)}>
-            {link.label}
-          </NavLink>
-        ))}
+      <div id="mobile-menu" className={`mobile-menu${open ? " open" : ""}`} aria-hidden={!open} onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
+        <button className="mobile-close" onClick={() => setOpen(false)} aria-label="Close menu" tabIndex={open ? 0 : -1}><Icon name="close" size={20} /></button>
+        <div className="mobile-links">
+          {LINKS.map((l, i) => (
+            <NavLink key={l.to} to={l.to} data-civ={l.civ} style={{ ["--i" as string]: i }} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>
+              <Crest civ={l.civ} />
+              <span><b>{l.label}</b><small>{l.sub}</small></span>
+            </NavLink>
+          ))}
+        </div>
       </div>
     </>
   );

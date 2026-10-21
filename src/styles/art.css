@@ -1,0 +1,98 @@
+/* SVG art system: shared classes + all animations. Transform/opacity only. */
+.art-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+svg [class*="a-"], .a-line { transform-box: fill-box; }
+.a-line { fill: none; stroke: var(--art-line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.a-thin { stroke-width: .8; }
+.a-fill { fill: var(--art-line); stroke: none; }
+.sigil { --art-line: #d9b96e; }
+
+/* Logo */
+.logo-mark { --art-line: #d9b85a; overflow: visible; }
+.logo-compass { transform-origin: 32px 10px; transform-box: view-box; }
+.logo-star { transform-origin: 32px 39px; transform-box: view-box; }
+.logo-mark.is-animated .logo-compass { animation: compass 7s ease-in-out infinite; }
+.logo-mark.is-animated .logo-star { animation: spin 40s linear infinite; }
+@keyframes compass { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.93); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Crests */
+.crest { width: 100%; height: auto; overflow: visible; }
+.crest-glow { animation: breathe 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.crest .wing-r { transform-origin: 138px 70px; transform-box: view-box; animation: wing-r 6s ease-in-out infinite; }
+.crest .wing-l { transform-origin: 138px 70px; transform-box: view-box; animation: wing-r 6s ease-in-out infinite; }
+.crest-disc { transform-box: fill-box; transform-origin: center; animation: pulse 4s ease-in-out infinite; }
+.crest-star { transform-box: fill-box; transform-origin: center; animation: spin 30s linear infinite; }
+.crest-bolt { animation: bolt 5s linear infinite; }
+@keyframes wing-r { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-2.2deg); } }
+@keyframes breathe { 0%, 100% { opacity: .65; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes pulse { 0%, 100% { opacity: .85; } 50% { opacity: 1; } }
+@keyframes bolt { 0%, 86%, 100% { filter: none; opacity: 1; } 88% { opacity: .35; } 90% { opacity: 1; filter: drop-shadow(0 0 6px #fff3c4); } 93% { opacity: .5; } 95% { opacity: 1; } }
+
+/* Halo (sacred geometry) */
+.halo { width: 100%; height: auto; overflow: visible; }
+.halo-ring { transform-origin: 300px 300px; transform-box: view-box; }
+.halo-cw { animation: spin 160s linear infinite; }
+.halo-ccw { animation: spin 120s linear infinite reverse; }
+.halo-cw.slow { animation-duration: 220s; }
+
+/* Fire altar */
+.fire-altar { width: 100%; height: auto; overflow: visible; }
+.flame { transform-box: fill-box; transform-origin: 50% 100%; }
+.flame-a { animation: flicker 2.6s ease-in-out infinite; }
+.flame-b { animation: flicker 2s ease-in-out infinite .3s; }
+.flame-c { animation: flicker 1.5s ease-in-out infinite .1s; }
+@keyframes flicker { 0%, 100% { transform: scale(1, 1) skewX(0); } 25% { transform: scale(.96, 1.05) skewX(1.5deg); } 50% { transform: scale(1.02, .96) skewX(-1.5deg); } 75% { transform: scale(.97, 1.04) skewX(1deg); } }
+.spark { animation: rise 4.2s ease-in infinite; transform-box: fill-box; }
+@keyframes rise { 0% { transform: translateY(8px); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-34px); opacity: 0; } }
+
+/* Akhet */
+.akhet { width: 100%; height: auto; overflow: visible; }
+.akhet-sun { transform-box: fill-box; transform-origin: center; animation: pulse 5s ease-in-out infinite; }
+.akhet-rays { transform-origin: center; transform-box: fill-box; animation: spin 90s linear infinite; --art-line: #e8c870; opacity: .7; }
+.akhet-nile { stroke-dasharray: 6 8; animation: flow 5s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -28; } }
+
+/* Temple */
+.temple { width: 100%; height: auto; overflow: visible; }
+.temple-col { transform-box: fill-box; transform-origin: 50% 100%; animation: col-rise 1.4s var(--ease) both; animation-delay: calc(var(--i) * 110ms + 200ms); }
+@keyframes col-rise { from { transform: scaleY(0); opacity: 0; } to { transform: none; opacity: 1; } }
+.temple-bolt { animation: bolt 5s linear infinite; transform-box: fill-box; }
+
+/* Pillars */
+.pillar { width: 100%; height: auto; --art-line: #d9b85a; }
+.globe-meridian { fill: none; stroke: var(--art-line); stroke-width: .8; transform-origin: 40px 30px; transform-box: view-box; animation: meridian 9s linear infinite; }
+.globe-meridian.m2 { animation-delay: -4.5s; }
+@keyframes meridian { 0% { transform: scaleX(1); } 50% { transform: scaleX(.05); } 100% { transform: scaleX(1); } }
+
+/* Group emblem / divider */
+.group-emblem { --art-line: var(--accent); filter: drop-shadow(0 0 14px rgba(var(--glow), .35)); }
+.emblem-spin { transform-box: fill-box; transform-origin: center; animation: spin 50s linear infinite; }
+.div-line { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s var(--ease) .15s; opacity: .8; }
+.reveal.visible .div-line, .visible .div-line { stroke-dashoffset: 0; }
+.divider { --art-line: var(--accent); width: min(100%, 560px); margin: 2.5rem auto; }
+.divider svg { width: 100%; height: auto; overflow: visible; }
+.div-center { transform-box: fill-box; }
+.divider-lodge { --art-line: var(--gold); }
+.divider-lite { display: flex; align-items: center; gap: .8rem; margin: 1.1rem 0; }
+.divider-lite span { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--accent)); }
+.divider-lite span:last-child { background: linear-gradient(270deg, transparent, var(--accent)); }
+
+/* Egypt wheel */
+.cycle-node { cursor: default; }
+.cycle-node.is-link { cursor: pointer; }
+.cycle-node .node-disc { fill: #0f0b06; stroke: var(--accent); stroke-width: 1.2; transition: fill .3s, stroke .3s; }
+.cycle-node { transition: transform .4s var(--ease); }
+.cycle-node.is-link:hover .node-disc, .cycle-node:focus-visible .node-disc { fill: #1d1608; stroke: var(--accent-2); }
+.cycle-node text { font-family: var(--font-title); fill: var(--gold-light); letter-spacing: .08em; pointer-events: none; }
+.cycle-node .node-name { font-size: 15px; font-weight: 600; text-transform: uppercase; }
+.cycle-node .node-aspect { font-size: 12px; fill: rgba(240,230,200,.6); font-family: var(--font-body); font-style: italic; letter-spacing: .04em; }
+.cycle-center-name { font-family: var(--font-title); font-size: 17px; fill: var(--gold-light); letter-spacing: .25em; }
+.cycle-center-sub { font-family: var(--font-title); font-size: 8.5px; fill: var(--accent); letter-spacing: .3em; }
+.cycle-maat { display: grid; place-items: center; width: 64px; height: 64px; --art-line: var(--gold); }
+.cycle-sun { transform-origin: 300px 300px; transform-box: view-box; animation: spin 36s linear infinite; }
+
+/* Misc */
+.lost-keystone { width: min(300px, 70vw); margin: 0 auto; --art-line: var(--gold); }
+.keystone { animation: float 5s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+.flame-a { transform-box: fill-box; transform-origin: 50% 100%; }
