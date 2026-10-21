@@ -1,90 +1,66 @@
+import { useRef } from "react";
 import { BackgroundCanvas } from "../components/BackgroundCanvas";
 import { DeityCard } from "../components/DeityCard";
 import { DeityModal } from "../components/DeityModal";
 import { SearchToolbar } from "../components/SearchToolbar";
 import { Footer } from "../components/Footer";
+import { PageHero } from "../components/PageHero";
+import { SectionHead } from "../components/SectionHead";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useTilt } from "../hooks/useTilt";
 import { usePantheonExplorer } from "../hooks/usePantheonExplorer";
 import { greek } from "../data/registry";
+import type { EmblemId } from "../art/sigils";
+
+const EMBLEMS: EmblemId[] = ["greek-chaos", "greek-titans", "greek-olympians", "greek-underworld"];
+const NUMERALS = ["I", "II", "III", "IV"];
 
 export function GreekPage() {
-  const explorer = usePantheonExplorer(greek);
-  useScrollReveal([explorer.query, explorer.alignment]);
-
-  const resultMap = new Map(explorer.results.map((r) => [r.group.id, r.deities]));
+  const x = usePantheonExplorer(greek);
+  const root = useRef<HTMLElement>(null);
+  useScrollReveal([x.query, x.alignment, x.savedOnly]);
+  useTilt(root);
+  const empty = x.hasActiveFilter && x.totalMatches === 0;
+  const shown = greek.groups.map((g, i) => ({ g, i, deities: x.byGroup.get(g.id) ?? [] })).filter((s) => s.deities.length > 0);
 
   return (
     <>
       <BackgroundCanvas theme="greek" />
-      <main className="page-wrapper">
-        <header className="greek-header">
-          <p className="eyebrow page-eyebrow reveal">{greek.eyebrow}</p>
-          <h1 className="page-h1 reveal">{greek.title}</h1>
-          <p className="page-subtitle reveal">{greek.tagline}</p>
-          <div className="hero-before-text reveal" style={{ textAlign: "center" }}>
-            <p className="before-label">Before the First God</p>
-            <p className="before-body">{greek.originStory}</p>
-          </div>
-        </header>
+      <main className="page-wrapper" ref={root} data-civ="greek">
+        <PageHero civ="greek" eyebrow={greek.eyebrow} title={greek.title} tagline={greek.tagline} origin={greek.originStory} />
 
-        <SearchToolbar
-          query={explorer.query}
-          onQueryChange={explorer.setQuery}
-          alignment={explorer.alignment}
-          onAlignmentChange={explorer.setAlignment}
-          alignments={["all"]}
-          onRandom={explorer.pickRandom}
-          placeholder="Search the Greek pantheon"
-        />
+        <section className="block" aria-label="The generations of the gods">
+          <SearchToolbar
+            query={x.query} onQueryChange={x.setQuery} alignment={x.alignment} onAlignmentChange={x.setAlignment}
+            alignments={["all"]} savedOnly={x.savedOnly} onSavedChange={x.setSavedOnly} savedCount={x.savedCount}
+            onRandom={x.pickRandom} total={x.totalMatches} hasFilter={x.hasActiveFilter} placeholder="Search the Greek pantheon"
+          />
+          {empty && <p className="empty-state">No deities match. Try another name, role, or clear the filters.</p>}
 
-        {explorer.hasActiveFilter && (
-          <p className="result-count">{explorer.totalMatches} deities found</p>
-        )}
-
-        {explorer.hasActiveFilter && explorer.totalMatches === 0 && (
-          <p className="empty-state">No deities match your search. Try a different term.</p>
-        )}
-
-        <section className="greek-cosmos">
-          {greek.groups.map((group, index) => {
-            const deities = explorer.hasActiveFilter ? resultMap.get(group.id) ?? [] : group.deities;
-            if (explorer.hasActiveFilter && deities.length === 0) return null;
+          {shown.map(({ g, i, deities }, n) => {
+            const [main, ...rest] = g.title.split(/\.\s+/);
             return (
-              <div key={group.id}>
-                <div className="family-generation reveal">
-                  <div className="tree-section-label">{group.eyebrow}</div>
-                  <div className="gen-title">{group.title}</div>
-                  <div className={`gen-grid${deities.length <= 3 ? " gen-grid-wide" : ""}`}>
-                    {deities.map((deity) => (
-                      <DeityCard
-                        key={deity.id}
-                        deity={deity}
-                        variant="greek"
-                        isFavorite={explorer.isFavorite(deity.id)}
-                        onToggleFavorite={explorer.toggleFavorite}
-                        onOpen={explorer.openDeity}
-                      />
-                    ))}
-                  </div>
-                </div>
-                {index < greek.groups.length - 1 && (
-                  <div className="lineage-connector reveal">
-                    <span className="lineage-label">DESCENDED FROM</span>
+              <div key={g.id} className="generation">
+                {n > 0 && (
+                  <div className="lineage reveal" aria-hidden="true">
+                    <svg viewBox="0 0 24 110" width="24" height="110"><path className="div-line" pathLength={1} d="M12 0V84" /><path d="M12 108 5 94h14Z" className="a-fill" /></svg>
+                    <span>Descended from</span>
                   </div>
                 )}
+                <SectionHead civ="greek" emblem={EMBLEMS[i] ?? "greek-olympians"} numeral={NUMERALS[i]} eyebrow={g.eyebrow} title={main} desc={rest.join(". ") || g.description || undefined} id={`gen-${g.id}`} />
+                <div className="gen-grid">
+                  {deities.map((d, k) => (
+                    <DeityCard key={d.id} deity={d} civ="greek" index={k} layout="stack" isFavorite={x.isFavorite(d.id)} onToggleFavorite={x.toggleFavorite} onOpen={x.openDeity} />
+                  ))}
+                </div>
               </div>
             );
           })}
         </section>
       </main>
 
-      <DeityModal
-        deity={explorer.activeDeity}
-        onClose={explorer.closeDeity}
-        isFavorite={explorer.activeDeity ? explorer.isFavorite(explorer.activeDeity.id) : false}
-        onToggleFavorite={explorer.toggleFavorite}
-      />
-
+      <DeityModal deity={x.activeDeity} civ="greek" list={x.visible} onClose={x.closeDeity} onSelect={x.openDeity}
+        isFavorite={x.activeDeity ? x.isFavorite(x.activeDeity.id) : false} onToggleFavorite={x.toggleFavorite} />
       <Footer showBackLink credit="GREECE · MOUNT OLYMPUS" />
     </>
   );

@@ -1,109 +1,77 @@
 import type { MouseEvent } from "react";
 import type { Deity } from "../models/Deity";
-import { assetUrl } from "../utils/assetUrl";
+import { Icon, type Civ } from "../art/core";
+import { Plate } from "./Plate";
+
+export type CardLayout = "side" | "stack" | "feature";
 
 interface DeityCardProps {
   deity: Deity;
-  variant: "persian" | "egypt" | "greek";
+  civ: Civ;
+  layout?: CardLayout;
   reversed?: boolean;
+  index?: number;
+  sizes?: string;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
   onOpen: (deity: Deity) => void;
 }
 
-function FavoriteButton({
-  active,
-  onClick,
-}: {
-  active: boolean;
-  onClick: (event: MouseEvent) => void;
-}) {
+export function FavoriteButton({ active, onClick }: { active: boolean; onClick: (e: MouseEvent) => void }) {
   return (
     <button
+      type="button"
       className={`favorite-toggle${active ? " active" : ""}`}
       onClick={onClick}
       aria-pressed={active}
-      aria-label={active ? "Remove from favorites" : "Add to favorites"}
-      title={active ? "Remove from favorites" : "Add to favorites"}
+      aria-label={active ? "Remove from saved" : "Save to favorites"}
+      title={active ? "Remove from saved" : "Save to favorites"}
     >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill={active ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6">
-        <path d="M12 21s-6.7-4.35-9.3-8.2C.86 9.9 1.6 6.3 4.6 4.9c2.3-1.07 4.9-.2 6.4 1.85C12.5 4.7 15.1 3.83 17.4 4.9c3 1.4 3.74 5 1.9 7.9C18.7 16.65 12 21 12 21z" />
-      </svg>
+      <Icon name="heart" size={16} filled={active} />
     </button>
   );
 }
 
-/**
- * Renders one deity using the visual language of its civilization.
- * The three legacy card layouts (persian-god-card, egypt-god-card,
- * greek-god-card) are preserved exactly so the ported CSS applies
- * without modification.
- */
-export function DeityCard({ deity, variant, reversed, isFavorite, onToggleFavorite, onOpen }: DeityCardProps) {
-  const handleFavoriteClick = (event: MouseEvent) => {
-    event.stopPropagation();
+/** Native-language line, rendered with the right script, direction and font. */
+export function NativeText({ civ, text }: { civ: Civ; text: string }) {
+  if (!text) return null;
+  if (civ === "persia") return <p className="native native-fa" lang="fa" dir="rtl">{text}</p>;
+  if (civ === "egypt") return <p className="native native-hiero" aria-hidden="true">{text}</p>;
+  return <p className="native native-gr" lang="el">{text}</p>;
+}
+
+export function DeityCard({ deity, civ, layout = "stack", reversed, index = 0, sizes, isFavorite, onToggleFavorite, onOpen }: DeityCardProps) {
+  const fav = (e: MouseEvent) => {
+    e.stopPropagation();
     onToggleFavorite(deity.id);
   };
-
-  const image = deity.image ? (
-    <img
-      className={
-        variant === "persian" ? "persian-god-img" : variant === "egypt" ? "egypt-god-img" : "greek-god-img"
-      }
-      src={assetUrl(deity.image)}
-      alt={deity.name}
-      loading="lazy"
-      onError={(event) => {
-        event.currentTarget.style.cssText =
-          "width:100%;height:100%;min-height:180px;background:linear-gradient(135deg,#241a08,#120c02);display:block;";
-      }}
-    />
-  ) : null;
-
-  if (variant === "persian") {
-    return (
-      <article
-        className="persian-god-card clickable-card reveal"
-        style={{ position: "relative" }}
-        onClick={() => onOpen(deity)}
-      >
-        <FavoriteButton active={isFavorite} onClick={handleFavoriteClick} />
-        {!reversed && image}
-        <div className="persian-god-info">
-          <h3>{deity.name}</h3>
-          <p className="farsi">{deity.nativeText}</p>
-          <span className={`role${deity.alignment === "evil" ? " role-evil" : ""}`}>{deity.role}</span>
-          <p>{deity.description}</p>
-        </div>
-        {reversed && image}
-      </article>
-    );
-  }
-
-  if (variant === "egypt") {
-    return (
-      <article className="egypt-god-card reveal clickable-card" style={{ position: "relative" }} onClick={() => onOpen(deity)}>
-        <FavoriteButton active={isFavorite} onClick={handleFavoriteClick} />
-        <div className="egypt-img-wrap">{image}</div>
-        <div className="egypt-card-body">
-          <h3>{deity.name}</h3>
-          <div className="hieroglyph">{deity.nativeText}</div>
-          <span className="aspect">{deity.role}</span>
-          <p>{deity.description}</p>
-        </div>
-      </article>
-    );
-  }
+  const defaultSizes =
+    layout === "side" ? "(min-width:1000px) 220px, (min-width:560px) 220px, 90vw"
+    : layout === "feature" ? "(min-width:1000px) 560px, 80vw"
+    : "(min-width:1040px) 360px, (min-width:720px) 300px, 50vw";
 
   return (
-    <article className="greek-god-card clickable-card reveal" style={{ position: "relative" }} onClick={() => onOpen(deity)}>
-      <FavoriteButton active={isFavorite} onClick={handleFavoriteClick} />
-      <div className="greek-img-wrap">{image}</div>
-      <div className="greek-card-body">
-        <h3>{deity.name}</h3>
-        <p className="greek-name">{deity.nativeText}</p>
-        <span className="domain">{deity.role}</span>
-        <p>{deity.description}</p>
+    <article
+      className={`card card-${civ} card-${layout}${reversed ? " is-reversed" : ""} ${deity.alignment === "evil" ? "is-evil" : ""} reveal`}
+      data-civ={civ}
+      style={{ "--i": index } as React.CSSProperties}
+    >
+      <div className="card-media tilt">
+        <Plate civ={civ} image={deity.image} alt={`${deity.name}, ${deity.role}`} sizes={sizes ?? defaultSizes} />
+        <FavoriteButton active={isFavorite} onClick={fav} />
+      </div>
+      <div className="card-body">
+        <h3 className="card-name">
+          <button type="button" className="card-open" onClick={() => onOpen(deity)} aria-haspopup="dialog">
+            {deity.name}
+          </button>
+        </h3>
+        <NativeText civ={civ} text={deity.nativeText} />
+        <span className={`pill${deity.alignment === "evil" ? " pill-evil" : ""}`}>{deity.role}</span>
+        <p className="card-text">{deity.description}</p>
+        <span className="card-more" aria-hidden="true">
+          Read the legend <Icon name="arrow-right" size={14} />
+        </span>
       </div>
     </article>
   );

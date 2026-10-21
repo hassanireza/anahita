@@ -1,0 +1,86 @@
+/* ==========================================================================
+   ANAHITA design tokens + base.  "The Lodge of Three Pillars"
+   Persia = Wisdom (amber/crimson) · Egypt = Strength (gold/turquoise)
+   Greece = Beauty (marble/aegean).  Default system cursor is used throughout.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #c9a84c; --gold-light: #e8d08a; --gold-pale: #f5e9c3; --gold-deep: #8a6820;
+  --obsidian: #0a0806; --ink: #120f0a; --ink-2: #1a150d; --parchment: #f0e6c8;
+  --font-display: "Cinzel Decorative", "Cinzel", serif;
+  --font-title: "Cinzel", "Times New Roman", serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-fa: "Vazirmatn", "Noto Naskh Arabic", "EB Garamond", serif;
+  --font-hiero: "Noto Sans Egyptian Hieroglyphs", "Segoe UI Historic", serif;
+  --ease: cubic-bezier(0.19, 1, 0.22, 1);
+  --nav-h: 68px;
+  --maxw: 1240px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+
+  --accent: var(--gold); --accent-2: var(--gold-light); --art-line: var(--accent); --art-accent: var(--accent-2);
+  --glow: 201, 168, 76;
+}
+[data-civ="persia"], .persia-page { --accent: #e8a33d; --accent-2: #b3341f; --art-line: #dba443; --art-accent: #b3341f; --glow: 232, 163, 61; --tint: #1a0a03; }
+[data-civ="egypt"], .egypt-page   { --accent: #d4a94a; --accent-2: #3aa6a0; --art-line: #cfae6a; --art-accent: #3aa6a0; --glow: 212, 170, 90; --tint: #17100a; }
+[data-civ="greek"], .greek-page   { --accent: #a8c4e0; --accent-2: #c9a84c; --art-line: #a8c4e0; --art-accent: #c9a84c; --glow: 120, 165, 210; --tint: #0b1220; }
+
+html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--nav-h) + 24px); }
+body {
+  background: var(--obsidian); color: var(--parchment);
+  font-family: var(--font-body); font-size: 1.1rem; line-height: 1.75;
+  overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  /* default system cursor, intentionally not overridden */
+}
+body.scroll-locked { overflow: hidden; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: var(--gold-light); text-decoration: none; transition: color .3s; }
+a:hover { color: var(--gold-pale); }
+h1, h2, h3 { font-weight: 500; line-height: 1.15; }
+::selection { background: rgba(201, 168, 76, .35); color: #fff; }
+:focus-visible { outline: 2px solid var(--accent-2, var(--gold-light)); outline-offset: 3px; border-radius: 4px; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #06040a; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #c9a84c, #8a6820); border-radius: 4px; }
+* { scrollbar-width: thin; scrollbar-color: #c9a84c #06040a; }
+
+.skip-link { position: fixed; left: 1rem; top: -4rem; z-index: 2000; background: var(--gold); color: #1a1406; padding: .6rem 1rem; border-radius: 6px; font-family: var(--font-title); transition: top .2s; }
+.skip-link:focus { top: 1rem; }
+
+.page-wrapper { position: relative; z-index: 1; }
+.route-fade { animation: routeFade .5s var(--ease); }
+@keyframes routeFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.route-loading { min-height: 60vh; }
+
+/* ---------- Reveal ---------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease) var(--d, 0ms), transform .9s var(--ease) var(--d, 0ms); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ---------- Typography helpers ---------- */
+.eyebrow { font-family: var(--font-title); font-size: .78rem; letter-spacing: .38em; text-transform: uppercase; color: var(--accent); }
+.gold-shimmer {
+  background: linear-gradient(90deg, #8a6820, #e8d08a, #fff3c4, #e8d08a, #8a6820); background-size: 220% auto;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+@keyframes shimmer { to { background-position: -220% center; } }
+
+/* ---------- Atmosphere stage ---------- */
+.bg-stage { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: var(--obsidian); contain: strict; }
+.bg-stage::before { content: ""; position: absolute; inset: 0; opacity: .5; }
+.bg-stage::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, transparent 30%, rgba(0,0,0,.65) 100%); }
+.bg-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bg-home::before    { background: radial-gradient(ellipse at 50% 20%, rgba(201,168,76,.12), transparent 60%), linear-gradient(#0a0806, #120f0a); }
+.bg-persia::before  { background: radial-gradient(ellipse at 50% 0%, rgba(232,163,61,.18), transparent 55%), radial-gradient(ellipse at 50% 110%, rgba(179,52,31,.2), transparent 55%), linear-gradient(#0c0401, #160703); }
+.bg-egypt::before   { background: radial-gradient(ellipse at 50% 0%, rgba(212,170,90,.16), transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(58,166,160,.08), transparent 50%), linear-gradient(#070502, #0f0a04); }
+.bg-greek::before   { background: radial-gradient(ellipse at 50% 0%, rgba(120,165,210,.16), transparent 55%), linear-gradient(#030608, #070b14); }
+
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 1500; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--gold-deep), var(--gold-light)); pointer-events: none; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}

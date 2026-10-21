@@ -1,35 +1,33 @@
 import { useEffect } from "react";
 
 /**
- * Re-implements the original vanilla-JS IntersectionObserver reveal
- * effect declaratively. Any element rendered with the "reveal" class
- * fades and slides into place the first time it enters the viewport.
- * The effect re-scans the DOM whenever `deps` changes, which lets a
- * page re-run the observer after route changes or filtered results.
+ * Adds `.visible` to every `.reveal` element as it nears the viewport.
+ * Siblings revealed in the same frame are staggered via --d (capped) so
+ * grids cascade instead of popping in together. Re-scans when `deps` change.
  */
 export function useScrollReveal(deps: ReadonlyArray<unknown> = []): void {
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal:not(.visible)"));
+    if (els.length === 0) return;
+    if (typeof IntersectionObserver === "undefined") {
+      els.forEach((el) => el.classList.add("visible"));
+      return;
+    }
+    const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            window.setTimeout(() => el.classList.add("visible"), i * 60);
-            observer.unobserve(el);
-          }
-        });
+        let n = 0;
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          el.style.setProperty("--d", `${Math.min(n++, 6) * 70}ms`);
+          el.classList.add("visible");
+          io.unobserve(el);
+        }
       },
-      { threshold: 0.1 }
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
     );
-
-    elements.forEach((el) => {
-      if (!el.classList.contains("visible")) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
